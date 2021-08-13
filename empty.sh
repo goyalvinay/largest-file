@@ -1,14 +1,17 @@
 #! /bin/bash
-a=$(grep -l ".sh" *)
+a=$(grep -l ".log" *)
 echo $a
 echo
-for line in $(du -hsx * | sort -rh | head -10);do
+for line in $(ls -S);do
   echo $line
+  echo "Do you want to truncate any file?"
+   read c
+  if [ "$c" -eq "y" -o "$c" -eq "yes" ]; then
+    read filename
+    var1=$(truncate -s 0 "$filename".sh)
+  fi
+
 done 
-echo "Do you want to truncate any file?"
-read $c
-if [ "$c" -eq "y" -o "$c" -eq "yes" ]; then
-    read $filename
-    truncate -s 0 $filename
-fi
+
+
   
